@@ -4,7 +4,7 @@
 <link rel="icon" type="image/x-icon" href="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-tenor.gif">
 <meta content='Szt00Xploit' name='description'/>
 <meta content='Hacked By' name='keywords'/>
-<meta content='Hacked by' name='Abstract'/>
+<meta content='HAcked' name='Abstract'/>
 <meta name="title" content="Hacked By Szt00Xploit"/>
 <meta name="description" content="titid kaye"/>
 <meta name="keywords" content="Szt00Xploit"/>
@@ -69,16 +69,16 @@
             <br/><br/>
             <code>jika antartika adalah tepi bumi, mungkin antara kita hanya saling mengagumi</code>
           </div>
-          <br/><code>GREETZ TO: @bboscat | RendySec01 | Doll404 | Alexithema | ALL Member Asmodeus1985</code>
+          <br/><code>GREETZ TO: @bboscat | RendySec01 | z-prvthax | Doll404 | Alexithema | ALL Member Asmodeus1985</code>
         </div>
       </div></b></i>
       
       <!-- Audio Background -->
-      <audio src="https://kosred.com/a/wjlrsd.mp3" autoplay="1" id="lagu"></audio>
+      <audio src="https://i.top4top.io/m_3322ipgj61.mp3" autoplay="1" id="lagu"></audio>
       
       <!-- Contact Icons -->
       <div class="contact-icons">
-        <a href="https://t.me/superszt" target="_blank">
+        <a href="https://t.me/sztsss" target="_blank">
           <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
         </a>
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email" onclick="showPopup()">
