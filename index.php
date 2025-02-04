@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Hacked By ./Szt00Xploit</title>
+<title>Hacked By Szt00Xploit</title>
 <link rel="icon" type="image/x-icon" href="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-tenor.gif">
 <meta content='Szt00Xploit' name='description'/>
 <meta content='Hacked By' name='keywords'/>
